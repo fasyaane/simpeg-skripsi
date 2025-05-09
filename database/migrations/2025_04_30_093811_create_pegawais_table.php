@@ -13,6 +13,8 @@ return new class extends Migration
 {
     Schema::create('pegawais', function (Blueprint $table) {
         $table->id();
+        $table->unsignedBigInteger('user_id')->unique(); // atau after kolom lain
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         $table->string('nama_lengkap');
         $table->string('posisi');
         $table->date('tanggal_lahir');
