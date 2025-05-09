@@ -56,16 +56,21 @@
                         class="nav_logo-icon" style="width: 25px; height: auto;">
                     <span class="nav_logo-name">SIMPEG</span>
                 </a>
-                <div class="nav_list"> <a href="#" class="nav_link active"> <i
-                            class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a
-                        href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Users</span> </a> <a href="#" class="nav_link"> <i
-                            class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span>
+                <div class="nav_list"> <a href="{{ route('dashboard') }}" class="nav_link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <i class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Dashboard</span>
+                </a>
+
+                <a href="{{ route('pegawai.index') }}" class="nav_link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
+                    <i class='bx bx-user nav_icon'></i>
+                    <span class="nav_name">Data Pegawai</span>
+                </a> <a href="#" class="nav_link"> <i
+                            class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Data Akun</span>
                     </a> <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span
-                            class="nav_name">Bookmark</span> </a> <a href="#" class="nav_link"> <i
-                            class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> <a
+                            class="nav_name">Data Presensi</span> </a> <a href="#" class="nav_link"> <i
+                            class='bx bx-folder nav_icon'></i> <span class="nav_name">Penggajian</span> </a> <a
                         href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                            class="nav_name">Stats</span> </a> </div>
+                            class="nav_name">Laporan</span> </a> </div>
             </div>
 
         </nav>

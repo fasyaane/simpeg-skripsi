@@ -10,9 +10,10 @@ Route::get('/', function () {
 });
 
 // Dashboard setelah login
-Route::get('/dashboard', [PegawaiController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('pages.dashboard'); // arahkan ke file dashboard.blade.php
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // Group route yang butuh login
 Route::middleware('auth')->group(function () {

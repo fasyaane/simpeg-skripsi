@@ -1,14 +1,11 @@
 <x-app-layout>
     @section('content')
     <div class="container mt-5">
-        <h2 class="mb-4 text-start">Data Pegawai</h2>
-
-        {{-- Pesan sukses tampil ramping di tengah --}}
+        <h3 class="fw-bold" style="color:#3e6455;">Data Pegawai</h3>
 
 
-        {{-- Tombol tambah data --}}
         <div class="text-end mb-3">
-            <a href="{{ route('pegawai.create') }}" class="btn" style="background-color: #007A33; color: white;">+ Tambah Data</a>
+            <a href="{{ route('pegawai.create') }}" class="btn" style="background-color: #3e6455; color: white;">+ Tambah Data</a>
         </div>
 
         {{-- Tabel data --}}
@@ -36,7 +33,7 @@
                         <td class="text-start">{{ $pegawai->alamat }}</td>
                         <td>{{ $pegawai->no_hp }}</td>
                         <td>
-                            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm" style="background-color: #007A33; color: white;">
+                            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm" style="background-color: #3e6455; color: white;">
                                 <i class="bi bi-pencil-square me-1"></i>
                             </a>
                             <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline form-hapus">
