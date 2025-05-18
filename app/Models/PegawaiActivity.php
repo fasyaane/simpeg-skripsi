@@ -13,4 +13,11 @@ class PegawaiActivity extends Model
         'jam_mulai',
         'jam_selesai',
     ];
+
+    public function pegawais()
+    {
+        return $this->belongsToMany(Pegawai::class,'pegawai_activity_pegawai');
+
+    }
 }
+

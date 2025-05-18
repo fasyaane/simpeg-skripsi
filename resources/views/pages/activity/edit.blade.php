@@ -41,9 +41,39 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Akun User</label>
+                    <select name="pegawai_id[]" class="form-control select2" required multiple>
+                        <option value="">-- Pilih User --</option>
+                        @foreach ($pegawai as $pegawai)
+                            <option value="{{ $pegawai->id }}" {{ in_array($pegawai->id,$pegawais)? 'selected' : '' }}>
+                                {{ $pegawai->nama_lengkap }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('pegawai_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
             <button type="submit" class="btn" style="background-color: #426B5A; color: white;">Update</button>
             <a href="{{ route('activity.index') }}" class="btn btn-secondary">Batal</a>
         </form>
     </div>
     @endsection
+     @push('styles')
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
+     @push('scripts')
+         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+         <script>
+            $(document).ready(function() {
+                $('.select2').select2({
+                    placeholder: "-- Pilih User --",
+                    allowClear: false,
+                    width: '100%'
+                });
+            });
+        </script>
+    @endpush
 </x-app-layout>

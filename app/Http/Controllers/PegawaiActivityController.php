@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use App\Models\PegawaiActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,9 @@ class PegawaiActivityController extends Controller
      */
     public function create()
     {
-        return view('pages.activity.create');
+        $pegawai = Pegawai::all();
+        return view('pages.activity.create', compact('pegawai'));
+
     }
 
     /**
@@ -37,18 +40,20 @@ class PegawaiActivityController extends Controller
             'deskripsi' => 'required|string',
             'jam_mulai' => 'required|date',
             'jam_selesai' => 'required|date',
+            'pegawai_id' => 'required|array',
         ]);
 
         // Simpan data ke database
 
         DB::beginTransaction();
         try {
-            PegawaiActivity::create([
+            $activity = PegawaiActivity::create([
                 'nama_aktivitas' => $request->nama_aktivitas,
                 'deskripsi' => $request->deskripsi,
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
             ]);
+            $activity->pegawais() -> attach($request->pegawai_id);
             DB::commit();
             return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil ditambahkan!');
         } catch (\Throwable $th) {
@@ -74,8 +79,11 @@ class PegawaiActivityController extends Controller
      */
     public function edit($id)
     {
+        $pegawai = Pegawai::all();
         $activity = PegawaiActivity::findOrFail($id);
-        return view('pages.activity.edit', compact('activity'));
+        $pegawais = $activity->pegawais->pluck('id')->toArray();
+        // dd($pegawai->toArray(), $activity->toArray(),$pegawais);
+        return view('pages.activity.edit', compact('activity', 'pegawai','pegawais'));
     }
 
     /**
@@ -84,15 +92,19 @@ class PegawaiActivityController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-          'nama_aktivitas' => 'required|string|max:255',
+            'nama_aktivitas' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'jam_mulai' => 'required|date',
             'jam_selesai' => 'required|date',
+            'pegawai_id' => 'required|array',
+
         ]);
+
         DB::beginTransaction();
         try {
             $activity = PegawaiActivity::findOrFail($id);
             $activity->update($validatedData);
+            $activity->pegawais()->sync($request->pegawai_id);
             DB::commit();
             return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil diperbarui!');
         } catch (\Throwable $th) {

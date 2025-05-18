@@ -25,7 +25,7 @@
                     <input type="text" name="password_confirmation" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn" style="background-color: #426B5A; color: white;">Update</button>
+                <button type="submit" class="btn" style="background-color: #426B5A; color: white;">Tambah</button>
                 <a href="{{ route('user.index') }}" class="btn btn-secondary">Batal</a>
             </form>
         </div>
