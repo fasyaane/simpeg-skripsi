@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nama_aktivitas');
             $table->text('deskripsi');
-            $table->timestamp('waktu_mulai');
-            $table->timestamp('waktu_selesai');             
+            $table->datetime('jam_mulai');
+            $table->datetime('jam_selesai');
         });
     }
 

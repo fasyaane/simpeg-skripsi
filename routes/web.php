@@ -25,9 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 🔥 Route resource untuk CRUD data pegawai
-    Route::resource('pegawai', PegawaiController::class);
+    Route::resource('pegawai', PegawaiController::class)->except(['show']);
     Route::resource('user', UserController::class);
-    Route::resource('pegawai/activity', PegawaiActivityController::class);
+    Route::prefix('pegawai')->group(function () {
+        Route::resource('activity', PegawaiActivityController::class);
+    });
+
 
 
 });

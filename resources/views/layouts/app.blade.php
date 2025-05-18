@@ -99,7 +99,7 @@
         </nav>
     </div>
     <!--Container Main start-->
-    <main class="height-100 bg-light pt-4">
+    <main class="height-100 bg-white pt-4">
         <div class="pb-5">
             @yield('content')
         </div>

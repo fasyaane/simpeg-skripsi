@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PegawaiActivity extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'nama_aktivitas',
+        'deskripsi',
+        'jam_mulai',
+        'jam_selesai',
+    ];
 }
