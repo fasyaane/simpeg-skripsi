@@ -19,11 +19,16 @@ class Pegawai extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
      public function activities()
     {
         return $this->belongsToMany(PegawaiActivity::class,'pegawai_activity_pegawai');
+
+    }
+    public function presensis()
+    {
+        return $this->hasMany(Presensi::class,'pegawai_id');
 
     }
 }

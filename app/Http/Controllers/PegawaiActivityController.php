@@ -60,15 +60,19 @@ class PegawaiActivityController extends Controller
             $fileName = 'qr_' . time() . '.png';
 
 
-            $filePath = 'qrcodes/' . $fileName;
+            $filePath = 'qrcodes/' .$activity->uuid.'/'. $fileName;
 
-            // Generate QR Code dari UUID dan simpan ke storage
             $qrImage = QrCode::format('png')
                 ->size(300)
-                ->errorCorrection('H') // Reed Solomon Error Correction (L, M, Q, H)
+                ->errorCorrection('H')
                 ->generate($activity->uuid);
 
             Storage::disk('public')->put($filePath, $qrImage);
+
+            // ✅ Update kolom qrcode_path setelah file disimpan
+            $activity->update([
+                'qrcode_path' => $filePath,
+            ]);
             DB::commit();
             return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil ditambahkan!');
 
@@ -135,17 +139,24 @@ class PegawaiActivityController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
-        DB::beginTransaction();
-        try {
-            $activity = PegawaiActivity::findOrFail($id);
-            $activity->delete();
-            DB::commit();
-            return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil dihapus!');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menghapus data: ' . $th->getMessage());
+{
+    DB::beginTransaction();
+    try {
+        $activity = PegawaiActivity::findOrFail($id);
 
-        }
+        // Hapus folder QR code berdasarkan UUID
+        $uuid = $activity->uuid;
+        $folderPath = 'qrcodes/' . $uuid;
+        Storage::disk('public')->deleteDirectory($folderPath);
+
+        // Hapus data aktivitas
+        $activity->delete();
+
+        DB::commit();
+        return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil dihapus!');
+    } catch (\Throwable $th) {
+        DB::rollBack();
+        return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menghapus data: ' . $th->getMessage());
     }
+}
 }

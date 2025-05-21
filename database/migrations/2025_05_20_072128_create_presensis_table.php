@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('presensis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pegawai_id'); // jika pakai relasi
-            $table->date('tanggal');
-            $table->time('jam_masuk')->nullable();
-            $table->time('jam_keluar')->nullable();
+            $table->foreignId('pegawai_id')->constrained('pegawais')->onDelete('cascade');
+            $table->foreignId('activity_id')->constrained('pegawai_activities')->onDelete('cascade');
+            $table->enum('status', ['masuk', 'keluar']);
             $table->timestamps();
         });
     }

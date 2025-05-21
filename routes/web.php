@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\PegawaiActivityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PegawaiController;
@@ -34,8 +35,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
     Route::get('/penggajian', [PenggajianController::class, 'index'])->name('penggajian.index');
-
-
+    Route::get('/absen', [AbsenController::class, 'index'])->name('absen.index');
 
 
 

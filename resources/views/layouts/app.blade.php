@@ -77,7 +77,6 @@
                         <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Dashboard</span>
                     </a>
-
                     <a href="{{ route('pegawai.index') }}"
                         class="nav_link {{ request()->routeIs('pegawai.*') ? 'active' : '' }}">
                         <i class='bx bx-user nav_icon'></i>
@@ -86,13 +85,15 @@
                         class="nav_link {{ request()->routeIs('user.*') ? 'active' : '' }}"> <i
                             class='bx bx-id-card nav_icon'></i>
                         <span class="nav_name">Data Akun</span>
-                    </a> <a href="{{ route('activity.index') }}" class="nav_link"> <i class='bx bx-calendar-check nav_icon'></i> <span
-                        class="nav_name">Data Aktivitas</span> </a>
-                    </a> <a href="{{ route('presensi.index') }}" class="nav_link"> <i class='bx bx-calendar-check nav_icon'></i> <span
-                            class="nav_name">Data Presensi</span> </a> <a href="{{ route('penggajian.index') }}" class="nav_link"> <i
-                            class='bx bx-wallet nav_icon'></i> <span class="nav_name">Penggajian</span> </a> <a
-                        href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                            class="nav_name">Laporan</span> </a>
+                    </a> <a href="{{ route('activity.index') }}" class="nav_link"> <i
+                            class='bx bx-calendar-check nav_icon'></i> <span class="nav_name">Data Aktivitas</span> </a>
+                    </a> <a href="{{ route('presensi.index') }}" class="nav_link"> <i
+                            class='bx bx-calendar-check nav_icon'></i> <span class="nav_name">Data Presensi</span> </a>
+                    <a href="{{ route('penggajian.index') }}" class="nav_link"> <i class='bx bx-wallet nav_icon'></i>
+                        <span class="nav_name">Penggajian</span> </a> <a href="#" class="nav_link"> <i
+                            class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Laporan</span> </a>
+                    </a> <a href="{{ route('absen.index') }}" class="nav_link"> <i
+                            class='bx bx-wallet nav_icon'></i> <span class="nav_name">Absen</span> </a>
                 </div>
             </div>
 

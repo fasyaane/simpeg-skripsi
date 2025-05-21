@@ -13,11 +13,17 @@ class PegawaiActivity extends Model
         'deskripsi',
         'jam_mulai',
         'jam_selesai',
+        'qrcode_path',
     ];
 
     public function pegawais()
     {
         return $this->belongsToMany(Pegawai::class, 'pegawai_activity_pegawai');
+
+    }
+      public function presensis()
+    {
+        return $this->hasMany(Presensi::class,'activity_id');
 
     }
     protected static function boot()

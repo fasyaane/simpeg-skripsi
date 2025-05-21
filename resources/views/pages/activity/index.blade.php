@@ -12,12 +12,14 @@
         <table class="table table-bordered text-center">
             <thead class="table-light">
                 <tr>
-                    <th>Nomor</th>
+                    <th>No</th>
                     <th>Nama Aktivitas</th>
                     <th>Deskripsi</th>
                     <th>Jam Mulai</th>
                     <th>Jam Selesai</th>
+                    <th>QR Code </th>
                     <th>Aksi</th>
+
 
                 </tr>
             </thead>
@@ -29,6 +31,7 @@
                         <td>{{ $item->deskripsi }}</td>
                         <td>{{ $item->jam_mulai }}</td>
                         <td>{{ $item->jam_selesai }}</td>
+                        <td><img src="{{ asset('storage/' . $item->qrcode_path) }}" alt="QR Code" style="width:70px; height:70px;"></td>
                         <td>
                             <a href="{{ route('activity.edit', $item->id) }}" class="btn btn-sm" style="background-color: #3e6455; color: white;">
                                 <i class="bi bi-pencil-square me-1"></i>
