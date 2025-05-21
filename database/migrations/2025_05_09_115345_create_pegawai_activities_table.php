@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,6 +17,8 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->datetime('jam_mulai');
             $table->datetime('jam_selesai');
+            $table->uuid('uuid');
+            $table->string('qrcode_path')->nullable();
         });
     }
 

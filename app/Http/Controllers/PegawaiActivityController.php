@@ -6,6 +6,8 @@ use App\Models\Pegawai;
 use App\Models\PegawaiActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Storage;
 
 class PegawaiActivityController extends Controller
 {
@@ -43,7 +45,7 @@ class PegawaiActivityController extends Controller
             'pegawai_id' => 'required|array',
         ]);
 
-        // Simpan data ke database
+
 
         DB::beginTransaction();
         try {
@@ -53,14 +55,30 @@ class PegawaiActivityController extends Controller
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
             ]);
-            $activity->pegawais() -> attach($request->pegawai_id);
+            $activity->pegawais()->attach($request->pegawai_id);
+            // dd($activity->toArray());
+            $fileName = 'qr_' . time() . '.png';
+
+
+            $filePath = 'qrcodes/' . $fileName;
+
+            // Generate QR Code dari UUID dan simpan ke storage
+            $qrImage = QrCode::format('png')
+                ->size(300)
+                ->errorCorrection('H') // Reed Solomon Error Correction (L, M, Q, H)
+                ->generate($activity->uuid);
+
+            Storage::disk('public')->put($filePath, $qrImage);
             DB::commit();
             return redirect()->route('activity.index')->with('success', 'Data aktivitas berhasil ditambahkan!');
+
         } catch (\Throwable $th) {
+            // phpinfo();
             dd(
                 $request->toArray(),
                 $th
             );
+
             DB::rollBack();
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menambah data: ' . $th->getMessage());
         }
@@ -83,7 +101,7 @@ class PegawaiActivityController extends Controller
         $activity = PegawaiActivity::findOrFail($id);
         $pegawais = $activity->pegawais->pluck('id')->toArray();
         // dd($pegawai->toArray(), $activity->toArray(),$pegawais);
-        return view('pages.activity.edit', compact('activity', 'pegawai','pegawais'));
+        return view('pages.activity.edit', compact('activity', 'pegawai', 'pegawais'));
     }
 
     /**
