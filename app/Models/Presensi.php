@@ -14,14 +14,14 @@ class Presensi extends Model
         'activity_id',
         'status',
     ];
-    public function pegawais()
+
+    public function pegawai()  // dari pegawais jadi pegawai (tunggal)
     {
-        return $this->belongsTo(Pegawai::class,'pegawai_id');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id');
     }
-     public function activities()
+
+    public function aktivitas()  // dari activities jadi aktivitas (tunggal)
     {
-        return $this->belongsTo(PegawaiActivity::class,'activity_id');
-
-
+        return $this->belongsTo(PegawaiActivity::class, 'activity_id');
     }
 }

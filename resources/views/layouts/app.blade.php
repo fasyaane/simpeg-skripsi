@@ -92,7 +92,7 @@
                     <a href="{{ route('penggajian.index') }}" class="nav_link"> <i class='bx bx-wallet nav_icon'></i>
                         <span class="nav_name">Penggajian</span> </a> <a href="#" class="nav_link"> <i
                             class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Laporan</span> </a>
-                    </a> <a href="{{ route('absen.index') }}" class="nav_link"> <i
+                    </a> <a href="{{ route('presensi.create') }}" class="nav_link"> <i
                             class='bx bx-wallet nav_icon'></i> <span class="nav_name">Absen</span> </a>
                 </div>
             </div>

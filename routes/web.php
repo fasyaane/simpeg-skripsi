@@ -34,8 +34,13 @@ Route::middleware('auth')->group(function () {
         Route::resource('activity', PegawaiActivityController::class);
     });
     Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
+
     Route::get('/penggajian', [PenggajianController::class, 'index'])->name('penggajian.index');
-    Route::get('/absen', [AbsenController::class, 'index'])->name('absen.index');
+    Route::get('/absen', [PresensiController::class, 'create'])->name('presensi.create');
+
+    Route::post('/presensi', [PresensiController::class, 'store'])->name('presensi.store');
+
+
 
 
 

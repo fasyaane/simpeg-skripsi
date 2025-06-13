@@ -8,6 +8,9 @@ class AbsenController extends Controller
 {
      public function index()
     {
-        return view('pages.absen.index');
+        return view('pages.presensi.index');
     }
 }
+
+
+
